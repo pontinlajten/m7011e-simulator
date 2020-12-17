@@ -13,24 +13,24 @@ const userSchema = new Schema({
     },
     firstName: {
         type: String,
-        //required: true
+        required: true
     },
     lastName: {
         type: String,
-        //required: true
+        required: true
     },
     birthDate: {
         type: String,
-        //required: true
+        required: true
     },
     address: {
         type: String,
-        //required: true
+        required: true
     },
     createdEvents: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Event'
+            ref: 'SimulatorEvent'
         }
     ]
 });

@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
-    title: {
-        type: String,
+
+const simulatorSchema = new Schema({
+    windSpeed: {
+        type: Number,
         required: true
     },
-    description: {
-        type: String,
+    electricityConsumption: {
+        type: Number,
         required: true
     },
     price: {
@@ -23,6 +24,9 @@ const eventSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     } 
-});
+   
+  },
+  {timestamps: true}
+);
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model('SimulatorEvent', simulatorSchema);
