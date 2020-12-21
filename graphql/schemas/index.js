@@ -31,6 +31,12 @@ type User {
   createdEvents: [SimulatorEvent!]
 }
 
+type AuthData {
+  userId: ID!
+  token: String!
+  tokenExpiration: Int!
+}
+
 input UserInput {
   email: String!
   password: String!
@@ -47,6 +53,7 @@ input SimulatorEventInput {
   date: String!
 }
 
+
 input ProsumerInput {
   eventId: ID!
   production: Float!
@@ -58,6 +65,7 @@ input ProsumerInput {
 type RootQuery {
   simEvents: [SimulatorEvent!]!
   prosumerSimEvents: [Prosumer!]!
+  login(email: String!, password: String!): AuthData!
   
 }
 

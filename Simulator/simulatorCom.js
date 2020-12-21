@@ -10,27 +10,7 @@ class Simulator {
         this.elcon = elcon;
         this.price = price
     }
-
-updateDB() {
-
-    simData.findOne({ id: '1' }, function (err, simDAta) {
-        if (err)
-            res.send(err);
-
-            simDAta.windSpeed = wind;
-            simDAta.electricityConsumption = elcon;
-            simDAta.price = price;
-//save and check errors
-            simDAta.save(function (err) {
-            if (err)
-                res.json(err);
-            else res.send("Updated succesfully")
-
-        });
-    });
-}
-
-}
+};
 
 
 

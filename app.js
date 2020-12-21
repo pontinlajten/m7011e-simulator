@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHttp  = require('express-graphql').graphqlHTTP;
 const mongoose = require('mongoose');
+const authentication = require('./middleware/authentication');
 
 const graphqlBuildSchema = require('./graphql/schemas/index');
 const graphqlResolvers = require('./graphql/resolvers/index');
@@ -16,11 +17,24 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+/* app.use((req,res,next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autherization');
+  if (req.method === 'OPTIONS'){
+    return res.sendStatus(200);
+  }
+});
+ */
+
 var engines = require('consolidate');
 
 app.set('views', __dirname + '/views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
+
+
+app.use(authentication);
 
 
 app.use('/graphql', graphqlHttp({

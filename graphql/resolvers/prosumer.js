@@ -4,11 +4,14 @@ const {singleSimEvent,user,returnSimEvent} = require('./helper');
 
 
 module.exports = {
-    createProsumer: async args => {
+    createProsumer: async (args,req) => {
+        if(!req.isAuthenticated) {
+            throw new Error('Not authorized!');
+        }
         const fetchedEvent = await SimulatorEvent.findOne({_id: args.prosumerInput.eventId});
         const prosumer = new Prosumer({
             simulatorEvent: fetchedEvent,
-            user: '5fda7628d51be46ff3bba287',
+            user: req.userId,
             production: args.prosumerInput.production,
             netProduction: args.prosumerInput.netProduction,
             buffer: args.prosumerInput.buffer
@@ -20,7 +23,10 @@ module.exports = {
             user: user.bind(this, prosumer._doc.user)
         };
     },
-    prosumerSimEvents: async () => {
+    prosumerSimEvents: async (req) => {
+        if(!req.isAuthenticated) {
+            throw new Error('Not authorized!');
+        }
         try {
             const prosumerSimEvents = await Prosumer.find();
             return prosumerSimEvents.map(simEvent => {
@@ -34,7 +40,10 @@ module.exports = {
             throw err;
         }
     },
-    deleteProsumerSimEvent: async args => {
+    deleteProsumerSimEvent: async (args,req) => {
+        if(!req.isAuthenticated) {
+            throw new Error('Not authorized!');
+        }
         try {
             const deleteSimEvent = await Prosumer.findById(args.prosumerId).populate('simulatorEvent');
             const simulatorEvent = returnSimEvent(deleteSimEvent.simulatorEvent);

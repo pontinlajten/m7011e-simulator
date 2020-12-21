@@ -1,0 +1,40 @@
+.naviagtionBar {
+    position:fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 6rem;
+    background: green;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.navigationBarPic h1 {
+    margin: 0;
+    font-size: 2rem;
+
+}
+.navigationBarItems{
+    margin-left: 2rem;
+}
+.navigationBarItems ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.navigationBarItems li {
+    margin: 0 1rem;
+
+}
+.navigationBarItems a{
+    text-decoration:none;
+    color: black;
+
+}
+.navigationBarItems a:hover,
+.navigationBarItems a:active,
+.navigationBarItems a.active {
+    color: orange;
+}
